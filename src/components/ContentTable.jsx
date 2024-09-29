@@ -8,6 +8,10 @@ import SearchBar from './SearchBar';
 import Swal from "sweetalert2";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,9 +39,7 @@ export default function ContentTable() {
   const [newFilterData , setNewFilterData] = useState([]);
   const [viewProduct , setViewProduct] = useState(null);
   const [filterData, setFilterData] = useState('');
-  // const [editId , setEditId] = useState('')
-  
-  // console.log(editId , ":editId")
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -185,15 +187,44 @@ export default function ContentTable() {
             .then(json=>setViewProduct(json));
   }
 
+  const handleLogout = ()=>{
+    const getProducts = JSON.parse(localStorage.getItem('items'));
+    const updateProducts = getProducts.map((item)=>{
+      return item.isAdmin === true?{...item, isLogin:false}:item;
+    });
+    localStorage.setItem('items',JSON.stringify(updateProducts));
+    navigate('/SmootheCart');
+    Swal.fire({
+      title: "Logged out successfullly!!",
+      icon: "success",
+      confirmButtonColor:'#28a745'
+    });
+  }
+
+  const handleDeleteUser = ()=>{
+    const getProducts = JSON.parse(localStorage.getItem('items'));
+    const updateProducts = getProducts.map((item)=>{
+      return item.isLogin?{...item, isLogin:false, isDelete:true}:item;
+    });
+    localStorage.setItem('items',JSON.stringify(updateProducts));
+    navigate('/SmootheCart');
+    Swal.fire({
+      title: "Account Delete Successfully!!",
+      icon: "success",
+      confirmButtonColor:'#28a745'
+    });
+  }
+
   return (
     <>
       <h1 align='center'>Product Details</h1>
-      {/* <Button onClick={handleAdd}>XYZ</Button> */}
       <ToastContainer />
       <Box sx={{ padding: '0px 20px 20px 20px' }}>
         <Box sx={{ display: 'flex', justifyContent: 'end', margin: '15px 0', gap: 3 }}>
           <SearchBar data={filterData} setData={setFilterData} />
           <ModalTemplate align="end" name="Add" func={handleAdd} />
+          <Button variant='contained' sx={{margin:'10px 0'}} onClick={handleLogout}>Logout &nbsp; <LogoutIcon/></Button>
+          <Button variant='contained' sx={{margin:'10px 0'}} onClick={handleDeleteUser}>Delete &nbsp;<DeleteIcon/></Button>
         </Box>
 
         <TableContainer component={Paper} >
