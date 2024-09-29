@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/SmootheCart/static/css/main.00152928.css",
+    "main.js": "/SmootheCart/static/js/main.fc49427a.js",
+    "static/js/453.94999f0d.chunk.js": "/SmootheCart/static/js/453.94999f0d.chunk.js",
+    "static/media/Logo.png": "/SmootheCart/static/media/Logo.7ae3103f3f159d515f8e.png",
+    "index.html": "/SmootheCart/index.html",
+    "main.00152928.css.map": "/SmootheCart/static/css/main.00152928.css.map",
+    "main.fc49427a.js.map": "/SmootheCart/static/js/main.fc49427a.js.map",
+    "453.94999f0d.chunk.js.map": "/SmootheCart/static/js/453.94999f0d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.00152928.css",
+    "static/js/main.fc49427a.js"
+  ]
+}
