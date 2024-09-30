@@ -37,6 +37,8 @@ export default function TabView() {
   };
 
   return (
+    <>
+    <h2 style={{textAlign:'center'}}>Welcome to SmootheCart</h2>
     <Paper elevation={20} style={paperStyle}>
         <Tabs
           value={value}
@@ -58,5 +60,6 @@ export default function TabView() {
       <SignUp/>
       </TabPanel>
       </Paper>
+    </>
   );
 }
